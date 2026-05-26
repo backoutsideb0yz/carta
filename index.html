@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cartinha de Amor 💌</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Dancing+Script:wght@400;600;700&family=Kalam:wght@300;400;700&display=swap"
+            rel="stylesheet" />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                min-height: 100vh;
+                background: #fde8f0;
+                background-image:
+                    radial-gradient(
+                        circle at 10% 20%,
+                        #fce4ec 0%,
+                        transparent 40%
+                    ),
+                    radial-gradient(
+                        circle at 90% 80%,
+                        #f8bbd0 0%,
+                        transparent 40%
+                    ),
+                    radial-gradient(
+                        circle at 50% 50%,
+                        #fff0f5 0%,
+                        transparent 60%
+                    );
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 40px 20px;
+                font-family: "Kalam", cursive;
+            }
+
+            .hearts-bg {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                overflow: hidden;
+                z-index: 0;
+            }
+
+            .heart-float {
+                position: absolute;
+                opacity: 0.12;
+                animation: floatUp linear infinite;
+                font-size: 20px;
+            }
+
+            @keyframes floatUp {
+                0% {
+                    transform: translateY(100vh) rotate(0deg);
+                    opacity: 0;
+                }
+                10% {
+                    opacity: 0.12;
+                }
+                90% {
+                    opacity: 0.12;
+                }
+                100% {
+                    transform: translateY(-100px) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+
+            .envelope-scene {
+                position: relative;
+                z-index: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .wax-seal {
+                width: 64px;
+                height: 64px;
+                background: radial-gradient(
+                    circle at 35% 35%,
+                    #e91e63,
+                    #880e4f
+                );
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 26px;
+                box-shadow:
+                    0 4px 12px rgba(136, 14, 79, 0.4),
+                    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+                position: relative;
+                animation: sealPulse 3s ease-in-out infinite;
+            }
+
+            @keyframes sealPulse {
+                0%,
+                100% {
+                    transform: scale(1);
+                    box-shadow: 0 4px 12px rgba(136, 14, 79, 0.4);
+                }
+                50% {
+                    transform: scale(1.05);
+                    box-shadow: 0 6px 20px rgba(136, 14, 79, 0.6);
+                }
+            }
+
+            .notebook {
+                width: 100%;
+                max-width: 580px;
+                background: #fffdf9;
+                border-radius: 4px;
+                box-shadow:
+                    0 2px 0 #e8d5b7,
+                    0 4px 0 #d4b896,
+                    0 20px 60px rgba(0, 0, 0, 0.15),
+                    0 2px 8px rgba(0, 0, 0, 0.08);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .spiral {
+                position: absolute;
+                left: 50px;
+                top: 0;
+                bottom: 0;
+                width: 2px;
+                background: linear-gradient(
+                    to bottom,
+                    #c8a97e,
+                    #a0825a,
+                    #c8a97e
+                );
+                z-index: 10;
+            }
+
+            .spiral::before {
+                content: "";
+                position: absolute;
+                left: -8px;
+                top: 0;
+                bottom: 0;
+                width: 18px;
+                background: repeating-linear-gradient(
+                    to bottom,
+                    transparent 0px,
+                    transparent 18px,
+                    rgba(160, 130, 90, 0.6) 18px,
+                    rgba(160, 130, 90, 0.6) 20px,
+                    transparent 20px,
+                    transparent 30px
+                );
+            }
+
+            .spiral-holes {
+                position: absolute;
+                left: 42px;
+                top: 24px;
+                bottom: 24px;
+                width: 18px;
+                z-index: 11;
+                display: flex;
+                flex-direction: column;
+                gap: 0;
+                pointer-events: none;
+            }
+
+            .hole {
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                background: #e8d5c0;
+                box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25);
+                flex-shrink: 0;
+                margin-bottom: 20px;
+            }
+
+            .notebook-content {
+                padding: 0 44px 44px 80px;
+                background-image: repeating-linear-gradient(
+                    to bottom,
+                    transparent 0px,
+                    transparent 31px,
+                    #b8d4e8 31px,
+                    #b8d4e8 32px
+                );
+                background-size: 100% 32px;
+                background-position: 0 0;
+                min-height: 600px;
+                padding-top: 32px;
+            }
+
+            .margin-line {
+                position: absolute;
+                left: 78px;
+                top: 0;
+                bottom: 0;
+                width: 1.5px;
+                background: rgba(255, 120, 120, 0.5);
+                z-index: 9;
+            }
+
+            .linha {
+                display: block;
+                line-height: 32px;
+                min-height: 32px;
+            }
+
+            .campo {
+                display: inline-block;
+                line-height: 32px;
+                min-height: 32px;
+                outline: none;
+                caret-color: #e91e63;
+                border: none;
+                background: transparent;
+                color: #3d2b2b;
+                vertical-align: bottom;
+            }
+
+            .campo[data-empty="true"] {
+                color: #c8a0b0;
+                font-style: italic;
+            }
+
+            .campo-full {
+                width: 100%;
+            }
+
+            .letter-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+                height: 32px;
+                margin-bottom: 0;
+            }
+
+            .letter-date {
+                font-family: "Caveat", cursive;
+                font-size: 15px;
+                color: #9e7a6a;
+                line-height: 32px;
+            }
+
+            .header-hearts {
+                display: flex;
+                gap: 4px;
+                line-height: 32px;
+            }
+
+            .header-hearts span {
+                font-size: 16px;
+                animation: heartBeat 1.5s ease-in-out infinite;
+            }
+
+            .header-hearts span:nth-child(2) {
+                animation-delay: 0.2s;
+            }
+            .header-hearts span:nth-child(3) {
+                animation-delay: 0.4s;
+            }
+
+            @keyframes heartBeat {
+                0%,
+                100% {
+                    transform: scale(1);
+                }
+                14% {
+                    transform: scale(1.2);
+                }
+                28% {
+                    transform: scale(1);
+                }
+                42% {
+                    transform: scale(1.15);
+                }
+                70% {
+                    transform: scale(1);
+                }
+            }
+
+            .recipient-line {
+                height: 64px;
+                display: flex;
+                align-items: flex-end;
+                padding-bottom: 0;
+            }
+
+            .recipient-label {
+                font-family: "Dancing Script", cursive;
+                font-size: 28px;
+                font-weight: 700;
+                color: #c2185b;
+                line-height: 32px;
+                white-space: nowrap;
+                margin-bottom: 0;
+                align-self: flex-end;
+            }
+
+            .campo-recipient {
+                font-family: "Dancing Script", cursive;
+                font-size: 28px;
+                color: #c2185b;
+                line-height: 32px;
+                flex: 1;
+                font-weight: 700;
+                min-width: 60px;
+            }
+
+            .linha-decorativa {
+                width: 100%;
+                height: 32px;
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                gap: 8px;
+                color: #e8a0b8;
+                font-size: 14px;
+                letter-spacing: 4px;
+                padding-bottom: 4px;
+            }
+
+            .sticker-container {
+                position: absolute;
+                right: 14px;
+                top: 16px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 2px;
+            }
+
+            .sticker {
+                font-size: 22px;
+                transform: rotate(12deg);
+                filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.15));
+                animation: stickerWiggle 4s ease-in-out infinite;
+                display: inline-block;
+            }
+
+            .sticker:nth-child(2) {
+                transform: rotate(-8deg);
+                animation-delay: 1s;
+            }
+            .sticker:nth-child(3) {
+                transform: rotate(5deg);
+                animation-delay: 2s;
+            }
+
+            @keyframes stickerWiggle {
+                0%,
+                100% {
+                    transform: rotate(12deg);
+                }
+                50% {
+                    transform: rotate(15deg) scale(1.05);
+                }
+            }
+
+            .postit {
+                position: absolute;
+                bottom: 60px;
+                right: 20px;
+                width: 90px;
+                background: #fff9c4;
+                padding: 10px 10px 14px;
+                font-family: "Caveat", cursive;
+                font-size: 12px;
+                color: #5d4037;
+                box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.15);
+                transform: rotate(-5deg);
+                line-height: 1.4;
+                z-index: 20;
+            }
+
+            .postit::before {
+                content: "";
+                position: absolute;
+                top: -6px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 30px;
+                height: 12px;
+                background: rgba(255, 235, 59, 0.6);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            }
+
+            .tape {
+                position: absolute;
+                width: 70px;
+                height: 22px;
+                background: repeating-linear-gradient(
+                    45deg,
+                    rgba(233, 30, 99, 0.15),
+                    rgba(233, 30, 99, 0.15) 4px,
+                    rgba(255, 255, 255, 0.5) 4px,
+                    rgba(255, 255, 255, 0.5) 8px
+                );
+                border: 0.5px solid rgba(233, 30, 99, 0.2);
+                opacity: 0.85;
+                transform: rotate(-3deg);
+            }
+
+            .tape-top {
+                top: -8px;
+                left: 50%;
+                transform: translateX(-50%) rotate(-2deg);
+            }
+
+            .page-fold {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 0 0 32px 32px;
+                border-color: transparent transparent #e8d5c0 transparent;
+            }
+
+            .page-fold::before {
+                content: "";
+                position: absolute;
+                bottom: -32px;
+                right: -32px;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 32px 32px 0 0;
+                border-color: #d4bfa3 transparent transparent transparent;
+            }
+
+            .floral-footer {
+                padding: 4px 44px 10px 80px;
+                display: flex;
+                justify-content: center;
+                font-size: 18px;
+                letter-spacing: 6px;
+                background: #fffdf9;
+                border-top: 1px solid #f0e0d0;
+                color: #e91e63;
+                opacity: 0.7;
+            }
+
+            .flower-doodle {
+                position: absolute;
+                opacity: 0.45;
+            }
+
+            .drawn-hearts {
+                display: flex;
+                gap: 8px;
+                justify-content: center;
+                align-items: flex-end;
+                height: 32px;
+                padding-bottom: 2px;
+            }
+
+            .drawn-hearts svg {
+                animation: heartBeat 2s ease-in-out infinite;
+                display: block;
+            }
+
+            .drawn-hearts svg:nth-child(2) {
+                animation-delay: 0.3s;
+            }
+            .drawn-hearts svg:nth-child(3) {
+                animation-delay: 0.6s;
+            }
+
+            .signature-block {
+                text-align: right;
+                padding-right: 12px;
+            }
+
+            .signature-from {
+                font-family: "Caveat", cursive;
+                font-size: 16px;
+                color: #9e7a6a;
+                line-height: 32px;
+                display: block;
+            }
+
+            .campo-signature {
+                font-family: "Dancing Script", cursive;
+                font-size: 30px;
+                color: #c2185b;
+                line-height: 32px;
+                font-weight: 700;
+                text-align: right;
+                min-width: 80px;
+            }
+
+            .florzinha-linha {
+                display: block;
+                font-size: 18px;
+                line-height: 32px;
+                letter-spacing: 3px;
+                text-align: right;
+                padding-right: 12px;
+            }
+
+            .edit-hint {
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(194, 24, 91, 0.9);
+                color: white;
+                padding: 10px 20px;
+                border-radius: 24px;
+                font-family: "Kalam", cursive;
+                font-size: 15px;
+                box-shadow: 0 4px 16px rgba(194, 24, 91, 0.35);
+                z-index: 100;
+                animation: hintFade 4s ease-out forwards;
+                white-space: nowrap;
+            }
+
+            @keyframes hintFade {
+                0%,
+                70% {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(10px);
+                    pointer-events: none;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="hearts-bg" id="heartsBg"></div>
+        <div class="edit-hint" id="editHint">✏️</div>
+
+        <div class="envelope-scene">
+            <div class="wax-seal">💌</div>
+
+            <div class="notebook" style="position: relative">
+                <div class="spiral"></div>
+                <div class="spiral-holes" id="spiralHoles"></div>
+                <div class="margin-line"></div>
+                <div class="tape tape-top"></div>
+
+                <div class="sticker-container">
+                    <span class="sticker">🌸</span>
+                    <span class="sticker">🌷</span>
+                    <span class="sticker">✨</span>
+                </div>
+
+                <div class="notebook-content">
+                    <div class="letter-header">
+                        <div class="letter-date">
+                            <span
+                                style="
+                                    font-family: &quot;Caveat&quot;, cursive;
+                                    font-size: 15px;
+                                    color: #9e7a6a;
+                                    line-height: 32px;
+                                    display: inline-block;
+                                "
+                                >26 de maio de 2026</span
+                            >
+                        </div>
+                        <div class="header-hearts">
+                            <span>🤍</span>
+                            <span>🩷</span>
+                            <span>❤️</span>
+                        </div>
+                    </div>
+
+                    <div class="recipient-line">
+                        <span class="recipient-label">Para: Laura,</span>
+                    </div>
+
+                    <div class="linha-decorativa">· · · ♡ · · ·</div>
+
+                    <span class="campo campo-full"
+                        >Você sabe que eu não sou muito bom com palavras, mas
+                        hoje</span
+                    >
+                    <span class="campo campo-full"
+                        >resolvi tentar, porque você merece muito mais do que
+                        silêncio.</span
+                    >
+                    <span class="campo campo-full"
+                        >Desde que você chegou, tudo ficou mais colorido por
+                        aqui —</span
+                    >
+                    <span class="campo campo-full"
+                        >até as manhãs que antes eram chatas viraram algo
+                        especial.</span
+                    >
+                    <span class="campo campo-full"
+                        >Eu penso em você nas coisas pequenas: jogando,
+                        estudando,</span
+                    >
+                    <span class="campo campo-full"
+                        >no meio de um dia qualquer quando nada parece fazer
+                        sentido.</span
+                    >
+                    <span class="campo campo-full"
+                        >É estranho como uma pessoa consegue mudar tudo
+                        assim,</span
+                    >
+                    <span class="campo campo-full"
+                        >sem nem perceber o quanto faz diferença só de estar ao
+                        meu lado</span
+                    >
+
+                    <div class="drawn-hearts">
+                        <svg
+                            width="24"
+                            height="22"
+                            viewBox="0 0 24 22"
+                            fill="none">
+                            <path
+                                d="M12 20.5C12 20.5 2 14 2 7.5C2 4.5 4.5 2 7.5 2C9.5 2 11 3 12 4.5C13 3 14.5 2 16.5 2C19.5 2 22 4.5 22 7.5C22 14 12 20.5 12 20.5Z"
+                                stroke="#e91e63"
+                                stroke-width="1.5"
+                                fill="#fce4ec" />
+                        </svg>
+                        <svg
+                            width="30"
+                            height="28"
+                            viewBox="0 0 30 28"
+                            fill="none">
+                            <path
+                                d="M15 26C15 26 2 17 2 9C2 5.5 4.8 2.5 8.5 2.5C11 2.5 13 3.8 15 6C17 3.8 19 2.5 21.5 2.5C25.2 2.5 28 5.5 28 9C28 17 15 26 15 26Z"
+                                stroke="#c2185b"
+                                stroke-width="1.8"
+                                fill="#f8bbd0" />
+                        </svg>
+                        <svg
+                            width="24"
+                            height="22"
+                            viewBox="0 0 24 22"
+                            fill="none">
+                            <path
+                                d="M12 20.5C12 20.5 2 14 2 7.5C2 4.5 4.5 2 7.5 2C9.5 2 11 3 12 4.5C13 3 14.5 2 16.5 2C19.5 2 22 4.5 22 7.5C22 14 12 20.5 12 20.5Z"
+                                stroke="#e91e63"
+                                stroke-width="1.5"
+                                fill="#fce4ec" />
+                        </svg>
+                    </div>
+
+                    <span class="campo campo-full"
+                        >Obrigado por existir e por me deixar fazer parte da sua
+                        vida.</span
+                    >
+
+                    <div class="signature-block">
+                        <span class="signature-from">Com todo o amor,</span>
+                        <span
+                            class="campo campo-signature"
+                            style="display: block"
+                            >Henrique.........</span
+                        >
+                        <span class="florzinha-linha">🌸 🌹 🌸</span>
+                    </div>
+                </div>
+
+                <div class="postit">
+                    <div
+                        style="
+                            font-size: 18px;
+                            text-align: center;
+                            margin-bottom: 4px;
+                        ">
+                        💕
+                    </div>
+                    <span
+                        style="
+                            color: #795548;
+                            font-family: &quot;Caveat&quot;, cursive;
+                            font-size: 12px;
+                        "
+                        >P.S.: você é a melhor sage 🌸</span
+                    >
+                </div>
+
+                <svg
+                    class="flower-doodle"
+                    style="bottom: 55px; left: 60px"
+                    width="60"
+                    height="60"
+                    viewBox="0 0 60 60"
+                    fill="none">
+                    <circle cx="30" cy="30" r="5" fill="#f48fb1" />
+                    <ellipse
+                        cx="30"
+                        cy="16"
+                        rx="5"
+                        ry="8"
+                        fill="#fce4ec"
+                        transform="rotate(0 30 30)" />
+                    <ellipse
+                        cx="30"
+                        cy="16"
+                        rx="5"
+                        ry="8"
+                        fill="#fce4ec"
+                        transform="rotate(45 30 30)" />
+                    <ellipse
+                        cx="30"
+                        cy="16"
+                        rx="5"
+                        ry="8"
+                        fill="#fce4ec"
+                        transform="rotate(90 30 30)" />
+                    <ellipse
+                        cx="30"
+                        cy="16"
+                        rx="5"
+                        ry="8"
+                        fill="#fce4ec"
+                        transform="rotate(135 30 30)" />
+                    <ellipse
+                        cx="30"
+                        cy="16"
+                        rx="5"
+                        ry="8"
+                        fill="#fce4ec"
+                        transform="rotate(180 30 30)" />
+                    <ellipse
+                        cx="30"
+                        cy="16"
+                        rx="5"
+                        ry="8"
+                        fill="#fce4ec"
+                        transform="rotate(225 30 30)" />
+                    <ellipse
+                        cx="30"
+                        cy="16"
+                        rx="5"
+                        ry="8"
+                        fill="#fce4ec"
+                        transform="rotate(270 30 30)" />
+                    <ellipse
+                        cx="30"
+                        cy="16"
+                        rx="5"
+                        ry="8"
+                        fill="#fce4ec"
+                        transform="rotate(315 30 30)" />
+                    <circle cx="30" cy="30" r="6" fill="#f48fb1" />
+                </svg>
+
+                <div class="page-fold"></div>
+
+                <div class="floral-footer">
+                    ♡ &nbsp; 🌸 &nbsp; ♡ &nbsp; 🌸 &nbsp; ♡
+                </div>
+            </div>
+
+            <div
+                style="
+                    font-family: &quot;Caveat&quot;, cursive;
+                    font-size: 14px;
+                    color: #c8a0b0;
+                    margin-top: 4px;
+                    text-align: center;
+                ">
+                ✦ feito com muito amor ✦
+            </div>
+        </div>
+
+        <script>
+            const heartsBg = document.getElementById("heartsBg");
+            const heartEmojis = ["♡", "♥", "❤", "🤍", "💕", "💗", "💖"];
+            for (let i = 0; i < 25; i++) {
+                const h = document.createElement("div");
+                h.className = "heart-float";
+                h.textContent =
+                    heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                h.style.left = Math.random() * 100 + "%";
+                h.style.fontSize = 14 + Math.random() * 22 + "px";
+                h.style.animationDuration = 8 + Math.random() * 14 + "s";
+                h.style.animationDelay = Math.random() * 12 + "s";
+                heartsBg.appendChild(h);
+            }
+
+            const spiralHoles = document.getElementById("spiralHoles");
+            const notebookH =
+                document.querySelector(".notebook-content").offsetHeight + 60;
+            const holeCount = Math.floor(notebookH / 38);
+            for (let i = 0; i < holeCount; i++) {
+                const hole = document.createElement("div");
+                hole.className = "hole";
+                spiralHoles.appendChild(hole);
+            }
+
+            document
+                .querySelectorAll(".campo[data-placeholder]")
+                .forEach((el) => {
+                    el.setAttribute("data-empty", "true");
+
+                    function showPlaceholder() {
+                        if (el.textContent.trim() === "") {
+                            el.setAttribute("data-empty", "true");
+                            el.textContent = "";
+                        }
+                    }
+
+                    function hidePlaceholder() {
+                        if (el.getAttribute("data-empty") === "true") {
+                            el.removeAttribute("data-empty");
+                            el.textContent = "";
+                        }
+                    }
+
+                    el.addEventListener("focus", hidePlaceholder);
+                    el.addEventListener("blur", showPlaceholder);
+                });
+
+            setTimeout(() => {
+                const hint = document.getElementById("editHint");
+                if (hint) hint.remove();
+            }, 4500);
+
+            document.addEventListener("click", function (e) {
+                if (e.target.closest(".notebook")) {
+                    const mini = document.createElement("div");
+                    mini.textContent = ["♡", "💕", "🌸"][
+                        Math.floor(Math.random() * 3)
+                    ];
+                    mini.style.cssText = `position:fixed;left:${e.clientX}px;top:${e.clientY}px;font-size:18px;pointer-events:none;z-index:9999;animation:miniHeartUp 0.9s ease-out forwards;`;
+                    document.body.appendChild(mini);
+                    if (!document.getElementById("miniStyle")) {
+                        const style = document.createElement("style");
+                        style.id = "miniStyle";
+                        style.textContent = `@keyframes miniHeartUp{0%{opacity:1;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-50px) scale(1.5);}}`;
+                        document.head.appendChild(style);
+                    }
+                    setTimeout(() => mini.remove(), 900);
+                }
+            });
+        </script>
+    </body>
+</html>
